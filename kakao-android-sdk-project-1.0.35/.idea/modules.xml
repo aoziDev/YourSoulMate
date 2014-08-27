@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/samples/kakaolink-sample/kakaolink-sample.iml" filepath="$PROJECT_DIR$/samples/kakaolink-sample/kakaolink-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/kakaostory-sample/kakaostory-sample.iml" filepath="$PROJECT_DIR$/samples/kakaostory-sample/kakaostory-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/kakaotalk-sample/kakaotalk-sample.iml" filepath="$PROJECT_DIR$/samples/kakaotalk-sample/kakaotalk-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/templates/loginbase-template/loginbase-template.iml" filepath="$PROJECT_DIR$/templates/loginbase-template/loginbase-template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/templates/loginfree-template/loginfree-template.iml" filepath="$PROJECT_DIR$/templates/loginfree-template/loginfree-template.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/push-sample/push-sample.iml" filepath="$PROJECT_DIR$/samples/push-sample/push-sample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sdk/sdk.iml" filepath="$PROJECT_DIR$/sdk/sdk.iml" />
+      <module fileurl="file://$PROJECT_DIR$/samples/usermgmt-sample/usermgmt-sample.iml" filepath="$PROJECT_DIR$/samples/usermgmt-sample/usermgmt-sample.iml" />
+    </modules>
+  </component>
+</project>
+
