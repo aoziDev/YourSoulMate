@@ -9,5 +9,6 @@
     <string name="retry">다시</string>
     <string name="result">결과</string>
     <string name="title_activity_intro">Intro</string>
-
+    <string name="kakaostory">카카오스토리</string>
+    
 </resources>

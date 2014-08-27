@@ -5,9 +5,11 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="8"
+        android:minSdkVersion="10"
         android:targetSdkVersion="21" />
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    
     <application
         android:name=".GlobalData"
         android:allowBackup="true"
@@ -26,11 +28,29 @@
         <activity
             android:name=".activity.ResultActivity"
             android:label="@string/title_activity_result" >
+            
+             <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="@string/kakao_scheme" android:host="@string/kakaostory_host" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_intro" >
         </activity>
+        
+        <activity android:name=".activity.KakaoStoryLoginActivity" />
+        
+        <activity android:name=".activity.KakaoStorySignupActivity"/>
+
+        <activity
+            android:name="com.kakao.LoginActivity"
+            android:configChanges="orientation|screenSize"/>
+        
+        <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key"/>
+        
     </application>
 
 </manifest>

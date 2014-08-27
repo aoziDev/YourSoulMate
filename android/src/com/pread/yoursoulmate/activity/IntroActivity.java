@@ -27,15 +27,13 @@ public class IntroActivity extends Activity {
     }
 
     private void loading() {
-        Log.e("loading", "111");
         FileIO fileIO = new FileIO();
         fileIO.read(getResources().openRawResource(R.raw.data));
         List<String> resultList = fileIO.getResult();
-        Log.e("loading", "222");
 
         GlobalData gd = (GlobalData)getApplicationContext();
         gd.setResultList(resultList);
-
-        Log.d("result", resultList.size()+"");
+        
+        Log.e("result", resultList.size()+"");
     }
 }
