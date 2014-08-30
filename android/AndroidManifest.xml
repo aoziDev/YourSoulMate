@@ -50,6 +50,7 @@
             android:configChanges="orientation|screenSize"/>
         
         <meta-data android:name="com.kakao.sdk.AppKey" android:value="@string/kakao_app_key"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/app_id"/>
         
     </application>
 
