@@ -21,19 +21,18 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.kakao.template.loginbase.SampleLoginActivity;
-import com.pread.yoursoulmate.R;
 
 public class KakaoStoryLoginActivity extends SampleLoginActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setBackground(getResources().getDrawable(R.drawable.kakaostory_sample_login_background));
+        //setBackground(getResources().getDrawable(R.drawable.kakaostory_sample_login_background));
     }
 
     @Override
     protected void onSessionOpened() {
-        final Intent intent = new Intent(KakaoStoryLoginActivity.this, KakaoStorySignupActivity.class);
+        final Intent intent = new Intent(KakaoStoryLoginActivity.this, KakaoStoryPostingActivity.class);
         startActivity(intent);
         finish();
     }

@@ -22,6 +22,7 @@ public class GlobalData extends com.kakao.template.loginbase.GlobalApplication {
 
     @Override
     public void onTerminate() {
+    	//1507537606157991
         super.onTerminate();
     }
 
