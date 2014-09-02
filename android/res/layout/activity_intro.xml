@@ -9,7 +9,7 @@
     tools:context="com.pread.yoursoulmate.activity.IntroActivity">
 
     <TextView
-        android:text="Loading"
+        android:text="@string/loading"
         android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />

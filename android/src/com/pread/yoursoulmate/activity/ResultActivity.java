@@ -43,6 +43,13 @@ public class ResultActivity extends Activity {
     			startActivity(intent);
     		}
     	});
+    	
+    	findViewById(R.id.btn_post_facebook).setOnClickListener(new OnClickListener() {
+    		@Override
+    		public void onClick(View v) {
+    			startActivity(new Intent(ResultActivity.this, FacebookPostingActivity.class));
+    		}
+    	});
     }
     
     private String getResult() {

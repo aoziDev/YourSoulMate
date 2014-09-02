@@ -36,4 +36,13 @@
         android:text="@string/kakaostory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    
+    <Button
+        android:id="@+id/btn_post_facebook"
+        android:layout_alignTop="@id/btn_again"
+        android:layout_toRightOf="@id/btn_post_kakaostory"
+        android:text="@string/facebook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
 </RelativeLayout>
