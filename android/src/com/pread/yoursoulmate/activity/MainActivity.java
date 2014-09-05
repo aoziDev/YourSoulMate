@@ -3,24 +3,45 @@ package com.pread.yoursoulmate.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.AnimationUtils;
 
 import com.pread.yoursoulmate.R;
-import com.pread.yoursoulmate.ani.FrameAnimationController;
 
 
 public class MainActivity extends Activity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 
-        View fingerprintView = findViewById(R.id.iv_fingerprint);
+		final View fingerprintView = findViewById(R.id.tv_fingerprint_shadow);
+		final Animation scanAnimation = AnimationUtils.loadAnimation(this, R.anim.fingerprint_scan);
+		
+		scanAnimation.setAnimationListener(new AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				
+			}
+
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+                startActivity(intent);
+			}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+				
+			}
+		});
+
+		/*
         AnimationDrawable aniDrawable = (AnimationDrawable) fingerprintView.getBackground();
         final FrameAnimationController aniController = new FrameAnimationController(aniDrawable) {
             @Override
@@ -30,7 +51,8 @@ public class MainActivity extends Activity {
                 startActivity(intent);
             }
         };
-
+*/
+		
         fingerprintView.setOnTouchListener(new View.OnTouchListener() {
                @SuppressLint("ClickableViewAccessibility") 
                @Override
@@ -39,12 +61,17 @@ public class MainActivity extends Activity {
 
                    switch (action) {
                        case MotionEvent.ACTION_DOWN:
-                           aniController.startCallbackTimer();
-                           aniController.start();
+                    	   fingerprintView.startAnimation(scanAnimation);
+                   		
+//                           aniController.startCallbackTimer();
+//                           aniController.start();
                            break;
                        case MotionEvent.ACTION_UP:
-                           aniController.stopCallbackTimer();
-                           aniController.reset();
+                    	   fingerprintView.startAnimation(scanAnimation);
+                    	   fingerprintView.clearAnimation();
+                      		
+//                           aniController.stopCallbackTimer();
+//                           aniController.reset();
                            break;
                        default:
                            break;
@@ -53,6 +80,6 @@ public class MainActivity extends Activity {
                }
            }
         );
-
-    }
+		
+	}
 }

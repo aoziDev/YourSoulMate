@@ -18,6 +18,7 @@
 package com.pread.yoursoulmate.activity;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Toast;
@@ -92,21 +93,28 @@ public class KakaoStoryPostingActivity extends SampleSignupActivity {
         requestPost(StoryType.LINK, postParamBuilder);
     }
 	
+	private ProgressDialog progDialog;
     private void requestPost(final StoryType storyType, final BasicKakaoStoryPostParamBuilder postParamBuilder) {
         //postParamBuilder.setAndroidExecuteParam(execParam).setIOSExecuteParam(execParam).setAndroidMarketParam(marketParam).setIOSMarketParam(marketParam);
-        try {
+		progDialog = ProgressDialog.show(KakaoStoryPostingActivity.this, null, "올리는중.. 우웩", true);        
+
+    	try {
             final Bundle parameters = postParamBuilder.build();
             KakaoStoryService.requestPost(storyType, new MyKakaoStoryHttpResponseHandler<MyStoryInfo>() {
                 @Override
                 protected void onHttpSuccess(final MyStoryInfo myStoryInfo) {
                     if(myStoryInfo.getId() != null) {
-                        Toast.makeText(getApplicationContext(), "succeeded to post " + storyType, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "등록 성공" + storyType, Toast.LENGTH_SHORT).show();
                     } else{
-                        Toast.makeText(getApplicationContext(), "failed to post " + storyType + " on KakaoStory.\nmyStoryId=null", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "등록 실패" + storyType + " on KakaoStory.\nmyStoryId=null", Toast.LENGTH_SHORT).show();
                     }
+                    
+                    progDialog.dismiss();
+                    finish();
                 }
             }, parameters);
         } catch (KakaoParameterException e) {
+        	progDialog.dismiss();
             Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }

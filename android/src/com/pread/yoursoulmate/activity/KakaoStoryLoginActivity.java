@@ -27,6 +27,7 @@ public class KakaoStoryLoginActivity extends SampleLoginActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         //setBackground(getResources().getDrawable(R.drawable.kakaostory_sample_login_background));
     }
 

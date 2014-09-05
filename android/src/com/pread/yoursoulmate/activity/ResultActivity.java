@@ -14,7 +14,8 @@ import com.pread.yoursoulmate.GlobalData;
 import com.pread.yoursoulmate.R;
 
 public class ResultActivity extends Activity {
-    @Override
+
+	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
@@ -27,7 +28,7 @@ public class ResultActivity extends Activity {
         GlobalData gd = (GlobalData)getApplicationContext();
         gd.setResultStr(resultStr);
     }
-    
+
     private void setButtonEvent() {
     	findViewById(R.id.btn_again).setOnClickListener(new OnClickListener() {
     		@Override

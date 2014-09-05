@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +43,6 @@ public class FacebookPostingActivity extends Activity {
 		if (isLogined()) {
 			authButton.setVisibility(View.GONE);
 			publishStory();     
-			finish();
 		} else {
 			Toast.makeText(FacebookPostingActivity.this, "로그인하세요.", Toast.LENGTH_SHORT).show();
 		}
@@ -83,6 +83,7 @@ public class FacebookPostingActivity extends Activity {
 		return true;
 	}
 
+	private ProgressDialog progDialog;
 	private void publishStory() {
 		Session session = Session.getActiveSession();
 		if (session != null) {
@@ -92,8 +93,14 @@ public class FacebookPostingActivity extends Activity {
 			if (!isSubsetOf(PERMISSIONS, permissions)) {
 				Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(this, PERMISSIONS);
 				session.requestNewPublishPermissions(newPermissionsRequest);
+				
+				progDialog.dismiss();
+				Toast.makeText(FacebookPostingActivity.this, "올릴 수 없음.. 퍼미션 에러", Toast.LENGTH_LONG).show();
+				finish();
 				return;
 			}
+
+			progDialog = ProgressDialog.show(FacebookPostingActivity.this, null, "올리는중.. 우웩", true);        
 
 			GlobalData gd = (GlobalData)getApplication();
 			
@@ -107,6 +114,7 @@ public class FacebookPostingActivity extends Activity {
 
 			Request.Callback callback= new Request.Callback() {
 				public void onCompleted(Response response) {
+					progDialog.dismiss();
 					Toast.makeText(getApplicationContext(), "등록성공", Toast.LENGTH_LONG).show();
 					finish();
 					/*
