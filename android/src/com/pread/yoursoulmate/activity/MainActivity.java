@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -11,7 +13,7 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 
 import com.pread.yoursoulmate.R;
-
+import com.pread.yoursoulmate.view.DrawingView;
 
 public class MainActivity extends Activity {
 
@@ -20,66 +22,65 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		final View fingerprintView = findViewById(R.id.tv_fingerprint_shadow);
+		final DrawingView fingerprint = new DrawingView(this);
+
+		final View fingerprintShadow = findViewById(R.id.tv_fingerprint_shadow);
+		final View fingerprintScanbar = findViewById(R.id.tv_fingerprint_scanbar); 
+
 		final Animation scanAnimation = AnimationUtils.loadAnimation(this, R.anim.fingerprint_scan);
-		
+
 		scanAnimation.setAnimationListener(new AnimationListener() {
 			@Override
-			public void onAnimationStart(Animation animation) {
-				
-			}
+			public void onAnimationStart(Animation animation) {}
+
+			@Override
+			public void onAnimationRepeat(Animation animation) {}
 
 			@Override
 			public void onAnimationEnd(Animation animation) {
-				Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                startActivity(intent);
-			}
+				fingerprintScanbar.setVisibility(View.INVISIBLE);
 
-			@Override
-			public void onAnimationRepeat(Animation animation) {
-				
+				Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+				startActivity(intent);
 			}
 		});
 
-		/*
-        AnimationDrawable aniDrawable = (AnimationDrawable) fingerprintView.getBackground();
-        final FrameAnimationController aniController = new FrameAnimationController(aniDrawable) {
-            @Override
-            public void animationCallback() {
-                Log.e("aniCallback", "callback");
-                Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-                startActivity(intent);
-            }
-        };
-*/
-		
-        fingerprintView.setOnTouchListener(new View.OnTouchListener() {
-               @SuppressLint("ClickableViewAccessibility") 
-               @Override
-               public boolean onTouch(View v, MotionEvent event) {
-                   int action = event.getAction();
+		fingerprintShadow.setOnTouchListener(new View.OnTouchListener() {
+			@SuppressLint("ClickableViewAccessibility") 
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				int action = event.getAction();
 
-                   switch (action) {
-                       case MotionEvent.ACTION_DOWN:
-                    	   fingerprintView.startAnimation(scanAnimation);
-                   		
-//                           aniController.startCallbackTimer();
-//                           aniController.start();
-                           break;
-                       case MotionEvent.ACTION_UP:
-                    	   fingerprintView.startAnimation(scanAnimation);
-                    	   fingerprintView.clearAnimation();
-                      		
-//                           aniController.stopCallbackTimer();
-//                           aniController.reset();
-                           break;
-                       default:
-                           break;
-                   }
-                   return true;
-               }
-           }
-        );
-		
-	}
+				switch (action) {
+				case MotionEvent.ACTION_DOWN:
+					Log.e("x", event.getX()+"");
+					Log.e("y", event.getY()+"");
+
+
+					fingerprint.setImageResource(R.drawable.fingerprint);
+					fingerprint.setPosistion(event.getX(), event.getY());
+					fingerprint.invalidate();
+
+					fingerprintShadow.startAnimation(scanAnimation);
+
+					fingerprintScanbar.setVisibility(View.VISIBLE);
+					fingerprintScanbar.startAnimation(scanAnimation);
+
+					break;
+				case MotionEvent.ACTION_UP:
+					fingerprintShadow.startAnimation(scanAnimation);
+					fingerprintShadow.clearAnimation();
+
+					fingerprintScanbar.setVisibility(View.INVISIBLE);
+					fingerprintScanbar.startAnimation(scanAnimation);
+					fingerprintScanbar.clearAnimation();
+
+					break;
+				default:
+					break;
+				}
+				return true;
+			}
+		});
+	}  
 }
