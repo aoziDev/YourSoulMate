@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
@@ -14,24 +15,36 @@ public class DrawingView extends View {
 	
 	public DrawingView(Context context) {
 		super(context);
-		//setFocusable(true);
 	}
 	
+	public DrawingView(Context context, AttributeSet attrs, int defStyleAttr) {
+		super(context, attrs, defStyleAttr);
+	}
+
+	public DrawingView(Context context, AttributeSet attrs) {
+		super(context, attrs);
+	}
+
 	public void setImageResource(int imageResource) {
 		image = BitmapFactory.decodeResource(getContext().getResources(), imageResource);
 	}
 	
 	public void setPosistion(float x, float y) {
-		this.x = x;
-		this.y = y;
+		if (image == null) {
+			return;
+		}
 		
-		Log.e("setPosition X", x+"");
-		Log.e("setPosition Y", y+"");
+		int w = image.getWidth();
+		int h = image.getHeight();
 		
+		this.x = x - (w/2);
+		this.y = y - (h/2);
 	}
 	
 	@Override
 	public void onDraw(Canvas canvas) {
+		super.onDraw(canvas);
+		Log.e("onDraw", "call");
 		if (image != null) {
 			canvas.drawBitmap(image, x, y, null);
 			
