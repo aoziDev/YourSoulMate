@@ -24,9 +24,7 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 
 		AdRequest adRequest = new AdRequest.Builder()
-        .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
         .build();
-
 
 		mAdView = (AdView)findViewById(R.id.adView);
 		mAdView.loadAd(adRequest);
