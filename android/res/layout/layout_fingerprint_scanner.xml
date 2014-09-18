@@ -1,0 +1,32 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:background="#000000" >
+
+    <ImageView
+        android:id="@+id/iv_fingerprint_scanner_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/test3"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/q"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/iv_fingerprint_scanner_board"
+        android:background="#FF0000"
+        android:height="2dp" />
+
+</RelativeLayout>
