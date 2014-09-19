@@ -1,10 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ads="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    android:background="#000000" >
+    android:layout_margin="5dp" >
 
     <ImageView
         android:id="@+id/iv_fingerprint_scanner_board"
@@ -15,18 +13,28 @@
         android:background="@drawable/test3"
         tools:ignore="ContentDescription" />
 
-    <ImageView
-        android:layout_width="30dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true"
-        android:background="@drawable/q"
-        tools:ignore="ContentDescription" />
+    <View
+        android:id="@+id/fingerprint_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/iv_fingerprint_scanner_board"
+        android:layout_alignRight="@id/iv_fingerprint_scanner_board" />
 
     <TextView
+        android:id="@+id/tv_fingerprint_scanbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="2dp"
         android:layout_alignRight="@+id/iv_fingerprint_scanner_board"
         android:background="#FF0000"
-        android:height="2dp" />
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/iv_fingerprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/q"
+        android:visibility="invisible"
+        tools:ignore="ContentDescription" />
 
 </RelativeLayout>
