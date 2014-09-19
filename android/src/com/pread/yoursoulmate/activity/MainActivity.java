@@ -1,8 +1,13 @@
 package com.pread.yoursoulmate.activity;
 
+import java.util.List;
+import java.util.Random;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
@@ -13,20 +18,28 @@ import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.pread.yoursoulmate.GlobalData;
 import com.pread.yoursoulmate.R;
 
 public class MainActivity extends Activity {
 	private AdView mAdView;
+	private Vibrator vibe;
+	private boolean isComplete;
 	
 	private void loadAdView() {
-		AdRequest adRequest = new AdRequest.Builder()
-		.build();
+		AdRequest adRequest = new AdRequest.Builder().build();
 		
 		mAdView = (AdView)findViewById(R.id.adView);
 		mAdView.loadAd(adRequest);
 	}
 	
 	private void init() {
+		isComplete = true;
+		vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+		initStatusStr();
+	}
+	
+	private void initStatusStr() {
 		setStatusStr("지문을 대세용");
 	}
 	
@@ -62,7 +75,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				fingerprintScanbar.setVisibility(View.INVISIBLE);
-				setStatusStr("스캔 완료");
+				showResult();
 			}
 		});
 
@@ -74,7 +87,14 @@ public class MainActivity extends Activity {
 
 				switch (action) {
 				case MotionEvent.ACTION_DOWN:
+					if (!isComplete) {
+						break;
+					}
+					
+					clearResult();
+					vibe.vibrate(20);     
 					setStatusStr("스캔 중..");
+
 					fingerprint.setVisibility(View.VISIBLE);
 					fingerprint.startAnimation(alphaAnim);
 					
@@ -88,7 +108,7 @@ public class MainActivity extends Activity {
 				case MotionEvent.ACTION_UP:
 					boolean isScanComplete = fingerprintScanbar.getVisibility() == View.INVISIBLE;
 					if (!isScanComplete) {
-						init();
+						initStatusStr();
 					}
 					
 					fingerprint.setVisibility(isScanComplete ? View.VISIBLE : View.INVISIBLE);
@@ -111,7 +131,47 @@ public class MainActivity extends Activity {
 			}
 		});
 	}  
+
+	private void clearResult() {
+		TextView resultView = (TextView)findViewById(R.id.tv_result);
+		resultView.setText("");
+	}
 	
+	private void showResult() {
+		TextView resultView = (TextView)findViewById(R.id.tv_result);
+		resultView.setText(getResult());
+		
+		Animation alphaAnim = AnimationUtils.loadAnimation(resultView.getContext(), R.anim.fingerprint_change_alpha);
+		resultView.startAnimation(alphaAnim);
+		alphaAnim.setAnimationListener(new AnimationListener() {
+			@Override
+			public void onAnimationStart(Animation animation) {
+				setStatusStr("분석 중..");
+				isComplete = false;
+			}
+			
+			@Override
+			public void onAnimationRepeat(Animation animation) {
+			}
+			
+			@Override
+			public void onAnimationEnd(Animation animation) {
+				setStatusStr("분석 완료");
+				isComplete = true;
+			}
+		});
+	}
+	
+    private String getResult() {
+    	GlobalData gd = (GlobalData) getApplicationContext();
+    	List<String> resultList = gd.getResultList();
+    	
+    	Random random = new Random(System.currentTimeMillis());
+    	int index = random.nextInt(resultList.size());
+    	
+    	return resultList.get(index);
+    }
+    
     @Override
     public void onPause() {
         if (mAdView != null) {
