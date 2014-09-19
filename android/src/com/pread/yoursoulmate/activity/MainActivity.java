@@ -3,13 +3,13 @@ package com.pread.yoursoulmate.activity;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -26,12 +26,22 @@ public class MainActivity extends Activity {
 		mAdView.loadAd(adRequest);
 	}
 	
+	private void init() {
+		setStatusStr("지문을 대세용");
+	}
+	
+	private void setStatusStr(String str) {
+		TextView statusView = (TextView)findViewById(R.id.tv_status);
+		statusView.setText(str);
+	}
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
 		loadAdView();
+		init();
 		
 		final ImageView fingerprint = (ImageView)findViewById(R.id.iv_fingerprint);
 		final Animation alphaAnim = AnimationUtils.loadAnimation(fingerprint.getContext(), R.anim.fingerprint_change_alpha);
@@ -52,6 +62,7 @@ public class MainActivity extends Activity {
 			@Override
 			public void onAnimationEnd(Animation animation) {
 				fingerprintScanbar.setVisibility(View.INVISIBLE);
+				setStatusStr("스캔 완료");
 			}
 		});
 
@@ -63,6 +74,7 @@ public class MainActivity extends Activity {
 
 				switch (action) {
 				case MotionEvent.ACTION_DOWN:
+					setStatusStr("스캔 중..");
 					fingerprint.setVisibility(View.VISIBLE);
 					fingerprint.startAnimation(alphaAnim);
 					
@@ -74,10 +86,12 @@ public class MainActivity extends Activity {
 					break;
 					
 				case MotionEvent.ACTION_UP:
+					boolean isScanComplete = fingerprintScanbar.getVisibility() == View.INVISIBLE;
+					if (!isScanComplete) {
+						init();
+					}
 					
-					fingerprint.setVisibility(
-							fingerprintScanbar.getVisibility() == View.VISIBLE ?
-									View.INVISIBLE : View.VISIBLE);
+					fingerprint.setVisibility(isScanComplete ? View.VISIBLE : View.INVISIBLE);
 					fingerprint.startAnimation(scanAnimation);
 					fingerprint.clearAnimation();
 					
