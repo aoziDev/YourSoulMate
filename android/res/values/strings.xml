@@ -12,4 +12,5 @@
     <string name="kakaostory">카카오스토리</string>
     <string name="facebook">페이스북</string>
     <string name="loading">Loading</string>
+    <string name="put_the_fingerprint">put the fingerprint</string>
 </resources>

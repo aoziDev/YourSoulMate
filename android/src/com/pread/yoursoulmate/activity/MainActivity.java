@@ -30,7 +30,6 @@ public class MainActivity extends Activity {
 		mAdView.loadAd(adRequest);
 		mAdView.bringToFront();
 		
-		
 		final DrawingView fingerprint = (DrawingView)findViewById(R.id.dv_fingerprint);
 		fingerprint.setImageResource(R.drawable.q);
 		
@@ -70,7 +69,6 @@ public class MainActivity extends Activity {
 
 					fingerprintScanbar.setVisibility(View.VISIBLE);
 					fingerprintScanbar.startAnimation(scanAnimation);
-					/* go through */
 				case MotionEvent.ACTION_MOVE:
 					fingerprint.setVisibility(View.VISIBLE);
 					fingerprint.setPosistion(event.getX(), event.getY() + title.getHeight());
@@ -96,8 +94,6 @@ public class MainActivity extends Activity {
 				return true;
 			}
 		});
-		
-	
 	}  
 	
     /** Called when leaving the activity */
