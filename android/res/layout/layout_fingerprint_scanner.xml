@@ -1,0 +1,41 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="5dp" >
+
+    <ImageView
+        android:id="@+id/iv_fingerprint_scanner_board"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/fingerprint_scanner_board"
+        tools:ignore="ContentDescription" />
+
+    <View
+        android:id="@+id/fingerprint_screen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignBottom="@id/iv_fingerprint_scanner_board"
+        android:layout_alignRight="@id/iv_fingerprint_scanner_board" />
+
+    <TextView
+        android:id="@+id/tv_fingerprint_scanbar"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_alignRight="@+id/iv_fingerprint_scanner_board"
+        android:background="#FF0000"
+        android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/iv_fingerprint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/fingerprint"
+        android:visibility="invisible"
+        tools:ignore="ContentDescription" />
+
+</RelativeLayout>
