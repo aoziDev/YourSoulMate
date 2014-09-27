@@ -2,15 +2,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@drawable/background"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
     <TextView
         android:id="@+id/tv_input_fingerprint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-  		android:paddingTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="5dp"
         android:background="#000000"
         android:text="@string/your_soulmate_is"
         android:textColor="#FFFFFF"
@@ -20,15 +21,47 @@
         android:id="@+id/tv_result"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_weight="1"
         android:paddingTop="10dp"
-    	android:layout_weight="1"
-        />
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tv_share_result"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:text="@string/share_result"
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_post_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/selector_facebook_posting"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btn_post_kakaostory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:background="@drawable/selector_kakaostory_posting"
+            android:visibility="invisible" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/tv_status"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
         android:background="#787E7EBD"
         android:gravity="center"
         android:paddingBottom="15dp"
