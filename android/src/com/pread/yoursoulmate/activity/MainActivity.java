@@ -111,6 +111,8 @@ public class MainActivity extends Activity {
 					m_vibe.vibrate(20);     
 					setStatusStr("스캔 중..");
 
+					setPostingVisible(View.INVISIBLE);
+					
 					fingerprint.setVisibility(View.VISIBLE);
 					fingerprint.startAnimation(alphaAnim);
 
@@ -143,6 +145,7 @@ public class MainActivity extends Activity {
 				default:
 					break;
 				}
+				
 				return true;
 			}
 		});
@@ -151,13 +154,14 @@ public class MainActivity extends Activity {
 
 	private void clearResult() {
 		m_resultView.setText("");
-
-		m_shareResult.setVisibility(View.INVISIBLE);
-		m_facebookPosting.setVisibility(View.INVISIBLE);
-		m_kakaostoryPosting.setVisibility(View.INVISIBLE);
-
 	}
 
+	private void setPostingVisible(int visible) {
+		m_shareResult.setVisibility(visible);
+		m_facebookPosting.setVisibility(visible);
+		m_kakaostoryPosting.setVisibility(visible);
+	}
+	
 	private void showResult() {
 		m_resultView.setText(getResult());
 
@@ -179,10 +183,7 @@ public class MainActivity extends Activity {
 				setStatusStr("분석 완료");
 				m_isComplete = true;
 
-				m_shareResult.setVisibility(View.VISIBLE);
-				m_facebookPosting.setVisibility(View.VISIBLE);
-				m_kakaostoryPosting.setVisibility(View.VISIBLE);
-
+				setPostingVisible(View.VISIBLE);
 			}
 		});
 	}

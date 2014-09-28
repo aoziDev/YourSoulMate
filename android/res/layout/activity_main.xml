@@ -43,7 +43,9 @@
             android:id="@+id/btn_post_facebook"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="3dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="3dp"
             android:background="@drawable/selector_facebook_posting"
             android:visibility="invisible" />
 
@@ -51,7 +53,6 @@
             android:id="@+id/btn_post_kakaostory"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
             android:background="@drawable/selector_kakaostory_posting"
             android:visibility="invisible" />
     </LinearLayout>

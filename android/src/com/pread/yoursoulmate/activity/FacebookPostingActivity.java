@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Toast;
 
 import com.facebook.FacebookException;
@@ -32,6 +33,20 @@ public class FacebookPostingActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_facebook_posting);
 
+		setCloseButton();
+		setLoginButton();
+	}
+
+	private void setCloseButton() {
+		findViewById(R.id.tv_facebook_posting_close).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				finish();
+			}
+		});
+	}
+
+	private void setLoginButton() {
 		LoginButton authButton = (LoginButton)findViewById(R.id.authButton);
 		authButton.setOnErrorListener(new OnErrorListener() {      
 			@Override
@@ -70,6 +85,7 @@ public class FacebookPostingActivity extends Activity {
 				}
 			}
 		});
+
 	}
 
 	private boolean isLogined(){
@@ -93,7 +109,7 @@ public class FacebookPostingActivity extends Activity {
 			if (!isSubsetOf(PERMISSIONS, permissions)) {
 				Session.NewPermissionsRequest newPermissionsRequest = new Session.NewPermissionsRequest(this, PERMISSIONS);
 				session.requestNewPublishPermissions(newPermissionsRequest);
-				
+
 				progDialog.dismiss();
 				Toast.makeText(FacebookPostingActivity.this, "올릴 수 없음.. 퍼미션 에러", Toast.LENGTH_LONG).show();
 				finish();
@@ -103,7 +119,7 @@ public class FacebookPostingActivity extends Activity {
 			progDialog = ProgressDialog.show(FacebookPostingActivity.this, null, "올리는중.. 우웩", true);        
 
 			GlobalData gd = (GlobalData)getApplication();
-			
+
 			Bundle postParams = new Bundle();
 			postParams.putString("name", "param name");
 			postParams.putString("caption", "param caption");
