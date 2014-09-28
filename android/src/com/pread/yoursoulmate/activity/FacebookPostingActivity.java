@@ -27,16 +27,22 @@ import com.pread.yoursoulmate.R;
 
 public class FacebookPostingActivity extends Activity {
 	private static final List<String> PERMISSIONS = Arrays.asList("publish_actions");
-
+	private LoginButton authButton;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_facebook_posting);
 
+		init();
 		setCloseButton();
 		setLoginButton();
 	}
 
+	private void init() {
+		authButton = (LoginButton)findViewById(R.id.authButton);
+	}
+	
 	private void setCloseButton() {
 		findViewById(R.id.tv_facebook_posting_close).setOnClickListener(new OnClickListener() {
 			@Override
@@ -47,7 +53,6 @@ public class FacebookPostingActivity extends Activity {
 	}
 
 	private void setLoginButton() {
-		LoginButton authButton = (LoginButton)findViewById(R.id.authButton);
 		authButton.setOnErrorListener(new OnErrorListener() {      
 			@Override
 			public void onError(FacebookException error) {
@@ -55,13 +60,8 @@ public class FacebookPostingActivity extends Activity {
 			}
 		});
 
-		if (isLogined()) {
-			authButton.setVisibility(View.GONE);
-			publishStory();     
-		} else {
-			Toast.makeText(FacebookPostingActivity.this, "로그인하세요.", Toast.LENGTH_SHORT).show();
-		}
-
+		publishStory();     
+		
 		// session status가 바뀔 때 -> 로그인하고 액티비티 복귀한다음 호출
 		authButton.setSessionStatusCallback(new Session.StatusCallback() {
 			@Override
@@ -74,11 +74,7 @@ public class FacebookPostingActivity extends Activity {
 							if (user != null) { 
 								// Login success (user에 정보가 들어있음.)
 								// Log.i(TAG,"User ID "+ user.getId());
-								if(isLogined()){
-									publishStory();     
-								} else {
-									Toast.makeText(FacebookPostingActivity.this, "로그인하세요.", Toast.LENGTH_SHORT).show();
-								}
+								publishStory();     
 							}
 						}
 					});
@@ -101,6 +97,12 @@ public class FacebookPostingActivity extends Activity {
 
 	private ProgressDialog progDialog;
 	private void publishStory() {
+		if (!isLogined()) {
+			return;
+		}
+		
+		authButton.setVisibility(View.GONE);
+		
 		Session session = Session.getActiveSession();
 		if (session != null) {
 
@@ -121,12 +123,12 @@ public class FacebookPostingActivity extends Activity {
 			GlobalData gd = (GlobalData)getApplication();
 
 			Bundle postParams = new Bundle();
-			postParams.putString("name", "param name");
-			postParams.putString("caption", "param caption");
-			postParams.putString("description", "param description");
+			postParams.putString("name", getString(R.string.your_soulmate_is));
+			postParams.putString("description", gd.getResultStr());
 			postParams.putString("link", "http://www.google.com");
-			postParams.putString("message", gd.getResultStr());
 			postParams.putString("picture", "http://imgtest.monkey3.co.kr/get_image.php?type=album&id=185582&w=100");
+			postParams.putString("caption", "당신의 소울메이트를 찾아보세요!");
+			//postParams.putString("message", gd.getResultStr());
 
 			Request.Callback callback= new Request.Callback() {
 				public void onCompleted(Response response) {

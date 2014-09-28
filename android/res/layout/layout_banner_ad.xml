@@ -5,7 +5,7 @@
     android:layout_height="wrap_content" >
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+        android:id="@+id/bannerAdView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         ads:adSize="SMART_BANNER"

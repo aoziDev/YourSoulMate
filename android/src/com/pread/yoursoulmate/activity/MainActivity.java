@@ -5,13 +5,18 @@ import java.util.Random;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
@@ -24,7 +29,8 @@ import com.pread.yoursoulmate.GlobalData;
 import com.pread.yoursoulmate.R;
 
 public class MainActivity extends Activity {
-	private AdView m_adView;
+	private AdView m_bannerAdView;
+	
 	private Vibrator m_vibe;
 	private boolean m_isComplete;
 
@@ -33,6 +39,9 @@ public class MainActivity extends Activity {
 	private View m_facebookPosting;
 	private View m_kakaostoryPosting;
 
+	private GlobalData gd;
+	private Dialog exitDialog;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -43,19 +52,24 @@ public class MainActivity extends Activity {
 
 		setFingerprintScanEvent();
 		setPostingEvent();
+		
+		createExitDialog();
 	}  
+
 
 	private void init() {
 		m_isComplete = true;
 		m_vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 		initStatusStr();
 
-		m_adView = (AdView)findViewById(R.id.adView);
-
+		m_bannerAdView = (AdView)findViewById(R.id.bannerAdView);
+		
 		m_resultView = (TextView)findViewById(R.id.tv_result);
 		m_shareResult = findViewById(R.id.tv_share_result);
 		m_facebookPosting = findViewById(R.id.btn_post_facebook);
 		m_kakaostoryPosting = findViewById(R.id.btn_post_kakaostory);
+
+		gd = (GlobalData) getApplicationContext();
 	}
 
 	private void initStatusStr() {
@@ -66,11 +80,11 @@ public class MainActivity extends Activity {
 		TextView statusView = (TextView)findViewById(R.id.tv_status);
 		statusView.setText(str);
 	}
-	
+
 	private void loadAdView() {
-		m_adView.loadAd(new AdRequest.Builder().build());
+		m_bannerAdView.loadAd(new AdRequest.Builder().build());
 	}
-	
+
 	private void setFingerprintScanEvent() {
 		final ImageView fingerprint = (ImageView)findViewById(R.id.iv_fingerprint);
 		final Animation alphaAnim = AnimationUtils.loadAnimation(fingerprint.getContext(), R.anim.fingerprint_change_alpha);
@@ -112,7 +126,7 @@ public class MainActivity extends Activity {
 					setStatusStr("스캔 중..");
 
 					setPostingVisible(View.INVISIBLE);
-					
+
 					fingerprint.setVisibility(View.VISIBLE);
 					fingerprint.startAnimation(alphaAnim);
 
@@ -145,7 +159,7 @@ public class MainActivity extends Activity {
 				default:
 					break;
 				}
-				
+
 				return true;
 			}
 		});
@@ -161,9 +175,11 @@ public class MainActivity extends Activity {
 		m_facebookPosting.setVisibility(visible);
 		m_kakaostoryPosting.setVisibility(visible);
 	}
-	
+
 	private void showResult() {
-		m_resultView.setText(getResult());
+		String result = getResult();
+		m_resultView.setText(result);
+		gd.setResultStr(result);
 
 		Animation alphaAnim = AnimationUtils.loadAnimation(m_resultView.getContext(), R.anim.fingerprint_change_alpha);
 		m_resultView.startAnimation(alphaAnim);
@@ -189,7 +205,6 @@ public class MainActivity extends Activity {
 	}
 
 	private String getResult() {
-		GlobalData gd = (GlobalData) getApplicationContext();
 		List<String> resultList = gd.getResultList();
 
 		Random random = new Random(System.currentTimeMillis());
@@ -200,25 +215,64 @@ public class MainActivity extends Activity {
 
 	private void setPostingEvent() {
 		findViewById(R.id.btn_post_kakaostory).setOnClickListener(new OnClickListener() {
-    		@Override
-    		public void onClick(View v) {
-    			startActivity(new Intent(MainActivity.this, KakaoStoryLoginActivity.class));
-    		}
-    	});
-    	
-    	findViewById(R.id.btn_post_facebook).setOnClickListener(new OnClickListener() {
-    		@Override
-    		public void onClick(View v) {
-    			startActivity(new Intent(MainActivity.this, FacebookPostingActivity.class));
-    		}
-    	});
-    	
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this, KakaoStoryLoginActivity.class));
+			}
+		});
+
+		findViewById(R.id.btn_post_facebook).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(MainActivity.this, FacebookPostingActivity.class));
+			}
+		});
+	}
+	
+	@SuppressLint("InflateParams") 
+	private void createExitDialog() {
+		View innerView = getLayoutInflater().inflate(R.layout.layout_exit_dialog, null);
+
+		exitDialog = new Dialog(this);
+		exitDialog.setContentView(innerView);
+		exitDialog.setTitle("종료하시겠습니까?");
+		exitDialog.setCanceledOnTouchOutside(false);
+		exitDialog.setCancelable(true);
+		
+		LayoutParams params = exitDialog.getWindow().getAttributes();
+		params.width = LayoutParams.MATCH_PARENT;
+		params.height = LayoutParams.WRAP_CONTENT;
+		exitDialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+
+		AdView dialogAdView = (AdView)exitDialog.findViewById(R.id.dialogAdView);
+		dialogAdView.loadAd(new AdRequest.Builder().build());
+		
+		exitDialog.findViewById(R.id.btn_exit_app).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				moveTaskToBack(true);
+				finish();
+				android.os.Process.killProcess(android.os.Process.myPid());
+			}
+		});
+		
+		exitDialog.findViewById(R.id.btn_exit_cancel).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				exitDialog.dismiss();
+			}
+		});
+	}
+	
+	@Override
+	public void onBackPressed() {
+		exitDialog.show();
 	}
 	
 	@Override
 	public void onPause() {
-		if (m_adView != null) {
-			m_adView.pause();
+		if (m_bannerAdView != null) {
+			m_bannerAdView.pause();
 		}
 		super.onPause();
 	}
@@ -226,15 +280,15 @@ public class MainActivity extends Activity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (m_adView != null) {
-			m_adView.resume();
+		if (m_bannerAdView != null) {
+			m_bannerAdView.resume();
 		}
 	}
 
 	@Override
 	public void onDestroy() {
-		if (m_adView != null) {
-			m_adView.destroy();
+		if (m_bannerAdView != null) {
+			m_bannerAdView.destroy();
 		}
 		super.onDestroy();
 	}

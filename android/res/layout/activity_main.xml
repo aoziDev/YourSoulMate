@@ -72,6 +72,6 @@
 
     <include layout="@layout/layout_fingerprint_scanner" />
 
-    <include layout="@layout/layout_ad" />
+    <include layout="@layout/layout_banner_ad" />
 
 </LinearLayout>

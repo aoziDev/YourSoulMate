@@ -12,4 +12,6 @@
     <string name="your_soulmate_is">당신의 소울메이트는..</string>
     <string name="share_result">결과 공유하기</string>
     <string name="x">X</string>
+    <string name="exit">종료</string>
+    <string name="cancel">취소</string>
 </resources>
