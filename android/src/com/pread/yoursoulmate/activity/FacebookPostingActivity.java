@@ -118,14 +118,14 @@ public class FacebookPostingActivity extends Activity {
 				return;
 			}
 
-			progDialog = ProgressDialog.show(FacebookPostingActivity.this, null, "올리는중.. 우웩", true);        
+			progDialog = ProgressDialog.show(FacebookPostingActivity.this, null, "등록중..", true);        
 
 			GlobalData gd = (GlobalData)getApplication();
 
 			Bundle postParams = new Bundle();
 			postParams.putString("name", getString(R.string.your_soulmate_is));
 			postParams.putString("description", gd.getResultStr());
-			postParams.putString("link", "http://www.google.com");
+			postParams.putString("link", "market://details?id=com.pread.yoursoulmate");
 			postParams.putString("picture", "http://imgtest.monkey3.co.kr/get_image.php?type=album&id=185582&w=100");
 			postParams.putString("caption", "당신의 소울메이트를 찾아보세요!");
 			//postParams.putString("message", gd.getResultStr());
