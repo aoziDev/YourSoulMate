@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="10dp"
-        facebook:login_text="페이스북 로그인"
-        facebook:logout_text="페이스북 로그아웃" />
+        facebook:login_text="페이스북 계정으로 로그인"
+        facebook:logout_text="로그아웃" />
 
 </RelativeLayout>

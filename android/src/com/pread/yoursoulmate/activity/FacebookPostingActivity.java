@@ -32,7 +32,7 @@ public class FacebookPostingActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_facebook_posting);
+		setContentView(R.layout.activity_facebook_login);
 
 		init();
 		setCloseButton();

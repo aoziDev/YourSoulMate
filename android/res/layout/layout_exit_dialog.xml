@@ -17,22 +17,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
-   
-    <Button 
-        android:id="@+id/btn_exit_app"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/exit"
-        />
-    
-    <Button 
-        android:id="@+id/btn_exit_cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/cancel"
-        />
+
+        <Button
+            android:id="@+id/btn_exit_app"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0"
+            android:background="#7F000000"
+            android:padding="15dp"
+            android:text="@string/exit"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/btn_exit_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="60dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1.0"
+            android:background="#7F000000"
+            android:padding="15dp"
+            android:text="@string/cancel"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>
