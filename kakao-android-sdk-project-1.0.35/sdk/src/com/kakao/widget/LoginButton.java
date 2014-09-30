@@ -105,6 +105,7 @@ public class LoginButton extends FrameLayout {
                 View v = super.getView(position, convertView, parent);
                 TextView tv = (TextView)v.findViewById(android.R.id.text1);
 
+                tv.setTextColor(0xFF000000);
                 tv.setText(items[position].textId);
                 tv.setTextSize(15);
                 tv.setGravity(Gravity.CENTER);
