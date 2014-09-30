@@ -105,12 +105,12 @@ public class KakaoStoryPostingActivity extends Activity {
 
         @Override
         protected void onNotKakaoStoryUser() {
-            Toast.makeText(getApplicationContext(), "not KakaoStory user", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "카카오스토리에 가입되지 않은 유저입니다.", Toast.LENGTH_SHORT).show();
         }
 
         @Override
         protected void onFailure(final APIErrorResult errorResult) {
-            final String message = "MyKakaoStoryHttpResponseHandler : failure : " + errorResult;
+            final String message = "HttpResponseHandler 실패(" + errorResult + ")";
             Logger.getInstance().d(message);
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
         }
@@ -133,7 +133,7 @@ public class KakaoStoryPostingActivity extends Activity {
                    //Toast.makeText(getApplicationContext(), "succeeded to get link info.\n" + kakaoStoryLinkInfo, Toast.LENGTH_SHORT).show();
                    requestPostLink(kakaoStoryLinkInfo, content);
                } else {
-                   Toast.makeText(getApplicationContext(), "failed to get link info.\nkakaoStoryLinkInfo=null", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Link정보 가져오기 실", Toast.LENGTH_SHORT).show();
                }
            }
        }, scrapUrl);
@@ -148,7 +148,7 @@ public class KakaoStoryPostingActivity extends Activity {
 	private ProgressDialog progDialog;
     private void requestPost(final StoryType storyType, final BasicKakaoStoryPostParamBuilder postParamBuilder) {
         //postParamBuilder.setAndroidExecuteParam(execParam).setIOSExecuteParam(execParam).setAndroidMarketParam(marketParam).setIOSMarketParam(marketParam);
-		progDialog = ProgressDialog.show(KakaoStoryPostingActivity.this, null, "올리는중.. 우웩", true);        
+		progDialog = ProgressDialog.show(KakaoStoryPostingActivity.this, null, "등록중..", true);        
 
     	try {
             final Bundle parameters = postParamBuilder.build();
@@ -156,9 +156,9 @@ public class KakaoStoryPostingActivity extends Activity {
                 @Override
                 protected void onHttpSuccess(final MyStoryInfo myStoryInfo) {
                     if(myStoryInfo.getId() != null) {
-                        Toast.makeText(getApplicationContext(), "등록 성공" + storyType, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "등록 성공", Toast.LENGTH_SHORT).show();
                     } else{
-                        Toast.makeText(getApplicationContext(), "등록 실패" + storyType + " on KakaoStory.\nmyStoryId=null", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "등록 실패" + "(on KakaoStory)", Toast.LENGTH_SHORT).show();
                     }
                     
                     progDialog.dismiss();

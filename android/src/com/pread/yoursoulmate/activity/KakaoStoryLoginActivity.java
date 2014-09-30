@@ -103,6 +103,5 @@ public class KakaoStoryLoginActivity extends Activity {
     	 final Intent intent = new Intent(KakaoStoryLoginActivity.this, KakaoStoryPostingActivity.class);
          startActivity(intent);
          finish();
-         
     }
 }

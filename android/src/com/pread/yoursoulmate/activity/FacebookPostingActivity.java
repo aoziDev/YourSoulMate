@@ -113,7 +113,7 @@ public class FacebookPostingActivity extends Activity {
 				session.requestNewPublishPermissions(newPermissionsRequest);
 
 				progDialog.dismiss();
-				Toast.makeText(FacebookPostingActivity.this, "올릴 수 없음.. 퍼미션 에러", Toast.LENGTH_LONG).show();
+				Toast.makeText(FacebookPostingActivity.this, "등록 실패(Permission error)", Toast.LENGTH_LONG).show();
 				finish();
 				return;
 			}
@@ -123,11 +123,11 @@ public class FacebookPostingActivity extends Activity {
 			GlobalData gd = (GlobalData)getApplication();
 
 			Bundle postParams = new Bundle();
-			postParams.putString("name", getString(R.string.your_soulmate_is));
+			postParams.putString("name", "name!!!");
 			postParams.putString("description", gd.getResultStr());
-			postParams.putString("link", "market://details?id=com.pread.yoursoulmate");
+			postParams.putString("link", "www.google.com");
 			postParams.putString("picture", "http://imgtest.monkey3.co.kr/get_image.php?type=album&id=185582&w=100");
-			postParams.putString("caption", "당신의 소울메이트를 찾아보세요!");
+			postParams.putString("caption", "caption!!!");
 			//postParams.putString("message", gd.getResultStr());
 
 			Request.Callback callback= new Request.Callback() {
