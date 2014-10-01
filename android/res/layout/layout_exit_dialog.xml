@@ -25,10 +25,10 @@
             android:layout_marginLeft="60dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1.0"
-            android:background="#7F000000"
+            android:background="@drawable/selector_dialog_button_bg"
             android:padding="15dp"
             android:text="@string/exit"
-            android:textColor="#FFFFFF" />
+            android:textColor="@drawable/selector_dialog_button_color" />
 
         <Button
             android:id="@+id/btn_exit_cancel"
@@ -37,10 +37,10 @@
             android:layout_marginRight="60dp"
             android:layout_marginTop="5dp"
             android:layout_weight="1.0"
-            android:background="#7F000000"
+            android:background="@drawable/selector_dialog_button_bg"
             android:padding="15dp"
             android:text="@string/cancel"
-            android:textColor="#FFFFFF" />
+            android:textColor="@drawable/selector_dialog_button_color" />
     </LinearLayout>
 
 </LinearLayout>
