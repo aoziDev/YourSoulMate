@@ -3,8 +3,6 @@ Pods/
 .DS_Store
 
 # android
-android/bin
-android/gen
+bin
+gen
 .metadata
-appcompat_v7/bin/
-kakao-android-sdk-project-1.0.35/
