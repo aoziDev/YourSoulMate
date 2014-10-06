@@ -4,7 +4,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/sdk"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/SampleLoginActivity"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/FacebookSDK"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
