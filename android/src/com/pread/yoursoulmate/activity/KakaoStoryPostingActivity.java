@@ -38,12 +38,18 @@ import com.kakao.UserManagement;
 import com.kakao.UserProfile;
 import com.kakao.helper.Logger;
 import com.pread.yoursoulmate.GlobalData;
+import com.pread.yoursoulmate.R;
 
 public class KakaoStoryPostingActivity extends Activity {
 
 //	private final String execParam = "place=1111";
 //  private final String marketParam = "referrer=kakaostory";
-    private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate";
+	
+	/* 테스트용 market주소 */
+	private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.macropinch.pearl";
+	
+	/* Release시 아래 주소로 수정 */
+//    private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate";
     
     /**
      * Main으로 넘길지 가입 페이지를 그릴지 판단하기 위해 me를 호출한다.
@@ -124,8 +130,9 @@ public class KakaoStoryPostingActivity extends Activity {
     
     protected void redirectMainActivity() {
        GlobalData gd = (GlobalData)getApplicationContext();
-       final String content = gd.getResultStr();
        
+       final String content = String.format("%s\n%s\n%s", getString(R.string.your_past_life), gd.getResultStr(), getString(R.string.was));
+
        KakaoStoryService.requestGetLinkInfo(new MyKakaoStoryHttpResponseHandler<KakaoStoryLinkInfo>() {
            @Override
            protected void onHttpSuccess(final KakaoStoryLinkInfo kakaoStoryLinkInfo) {

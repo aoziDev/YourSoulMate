@@ -136,7 +136,6 @@ public class FacebookPostingActivity extends Activity {
 
 			String resultMessage = String.format("%s\n%s\n%s", getString(R.string.your_past_life), gd.getResultStr(), getString(R.string.was));
 			postParams.putString("message", resultMessage);
-
 			
 			Request.Callback callback= new Request.Callback() {
 				public void onCompleted(Response response) {
