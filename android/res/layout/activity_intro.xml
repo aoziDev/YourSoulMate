@@ -9,7 +9,7 @@
         android:id="@+id/tv_intro_loading"
         android:text="@string/loading"
         android:textColor="@color/white"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
@@ -17,7 +17,7 @@
     <TextView 
         android:id="@+id/tv_touch_to_screen"
         android:text="@string/touch_to_screen"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:visibility="invisible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

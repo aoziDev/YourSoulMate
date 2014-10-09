@@ -123,13 +123,21 @@ public class FacebookPostingActivity extends Activity {
 			GlobalData gd = (GlobalData)getApplication();
 
 			Bundle postParams = new Bundle();
-			postParams.putString("name", "name!!!");
-			postParams.putString("description", gd.getResultStr());
-			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate");
-			postParams.putString("picture", "http://imgtest.monkey3.co.kr/get_image.php?type=album&id=185582&w=100");
-			postParams.putString("caption", "당신의 전생은?");
-			//postParams.putString("message", gd.getResultStr());
+			/* 테스트용 임시 market주소 */
+			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.macropinch.pearl");
+			/* Release시 아래주소로 변경 */
+//			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate");
+			
+			/* 링크주소가 Market주소가 아닐 때 링크 정보를 아래와 같이 수정할 수 있음 */
+//			postParams.putString("name", getString(R.string.your_past_life));
+//			postParams.putString("description", gd.getResultStr() + " " + getString(R.string.was));
+//			postParams.putString("caption", "당신의 전생을 확인해보세요!!");
+//			postParams.putString("picture", "http://imgtest.monkey3.co.kr/get_image.php?type=album&id=185582&w=100");
 
+			String resultMessage = String.format("%s\n%s\n%s", getString(R.string.your_past_life), gd.getResultStr(), getString(R.string.was));
+			postParams.putString("message", resultMessage);
+
+			
 			Request.Callback callback= new Request.Callback() {
 				public void onCompleted(Response response) {
 					progDialog.dismiss();
