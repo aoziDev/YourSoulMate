@@ -43,7 +43,7 @@ public class KakaoStoryPostingActivity extends Activity {
 
 //	private final String execParam = "place=1111";
 //  private final String marketParam = "referrer=kakaostory";
-    private final String scrapUrl = "http://www.google.com";
+    private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate";
     
     /**
      * Main으로 넘길지 가입 페이지를 그릴지 판단하기 위해 me를 호출한다.
@@ -133,7 +133,7 @@ public class KakaoStoryPostingActivity extends Activity {
                    //Toast.makeText(getApplicationContext(), "succeeded to get link info.\n" + kakaoStoryLinkInfo, Toast.LENGTH_SHORT).show();
                    requestPostLink(kakaoStoryLinkInfo, content);
                } else {
-                   Toast.makeText(getApplicationContext(), "Link정보 가져오기 실", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(getApplicationContext(), "Link정보 가져오기 실패", Toast.LENGTH_LONG).show();
                }
            }
        }, scrapUrl);
@@ -156,9 +156,9 @@ public class KakaoStoryPostingActivity extends Activity {
                 @Override
                 protected void onHttpSuccess(final MyStoryInfo myStoryInfo) {
                     if(myStoryInfo.getId() != null) {
-                        Toast.makeText(getApplicationContext(), "등록 성공", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "등록완료", Toast.LENGTH_LONG).show();
                     } else{
-                        Toast.makeText(getApplicationContext(), "등록 실패" + "(on KakaoStory)", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "등록실패" + "(on KakaoStory)", Toast.LENGTH_LONG).show();
                     }
                     
                     progDialog.dismiss();
@@ -167,7 +167,7 @@ public class KakaoStoryPostingActivity extends Activity {
             }, parameters);
         } catch (KakaoParameterException e) {
         	progDialog.dismiss();
-            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 }

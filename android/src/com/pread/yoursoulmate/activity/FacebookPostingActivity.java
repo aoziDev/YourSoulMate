@@ -125,15 +125,15 @@ public class FacebookPostingActivity extends Activity {
 			Bundle postParams = new Bundle();
 			postParams.putString("name", "name!!!");
 			postParams.putString("description", gd.getResultStr());
-			postParams.putString("link", "www.google.com");
+			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate");
 			postParams.putString("picture", "http://imgtest.monkey3.co.kr/get_image.php?type=album&id=185582&w=100");
-			postParams.putString("caption", "caption!!!");
+			postParams.putString("caption", "당신의 전생은?");
 			//postParams.putString("message", gd.getResultStr());
 
 			Request.Callback callback= new Request.Callback() {
 				public void onCompleted(Response response) {
 					progDialog.dismiss();
-					Toast.makeText(getApplicationContext(), "등록성공", Toast.LENGTH_LONG).show();
+					Toast.makeText(getApplicationContext(), "등록완료", Toast.LENGTH_LONG).show();
 					finish();
 					/*
                 	JSONObject graphResponse = response.getGraphObject().getInnerJSONObject();
