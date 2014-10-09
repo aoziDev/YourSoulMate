@@ -32,7 +32,7 @@ public class MainActivity extends Activity {
 	private boolean m_isComplete;
 
 	private TextView m_resultView;
-	private View m_shareResult;
+	private View m_was;
 	private View m_facebookPosting;
 	private View m_kakaostoryPosting;
 
@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 		m_bannerAdView = (AdView)findViewById(R.id.bannerAdView);
 		
 		m_resultView = (TextView)findViewById(R.id.tv_result);
-		m_shareResult = findViewById(R.id.tv_share_result);
+		m_was = findViewById(R.id.tv_was);
 		m_facebookPosting = findViewById(R.id.btn_post_facebook);
 		m_kakaostoryPosting = findViewById(R.id.btn_post_kakaostory);
 
@@ -70,7 +70,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void initStatusStr() {
-		setStatusStr("지문을 대세용");
+		setStatusStr("지문을 대세요");
 	}
 
 	private void setStatusStr(String str) {
@@ -168,7 +168,7 @@ public class MainActivity extends Activity {
 	}
 
 	private void setPostingVisible(int visible) {
-		m_shareResult.setVisibility(visible);
+		m_was.setVisibility(visible);
 		m_facebookPosting.setVisibility(visible);
 		m_kakaostoryPosting.setVisibility(visible);
 	}

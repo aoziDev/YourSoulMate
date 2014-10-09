@@ -3,10 +3,12 @@ package com.pread.yoursoulmate;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Application;
+
 /**
  * Created by hshan on 2014. 8. 16..
  */
-public class GlobalData extends com.kakao.template.loginbase.GlobalApplication {
+public class GlobalData extends Application {
     private List<String> resultList;
     private String resultStr;
     

@@ -7,15 +7,14 @@
     tools:context=".MainActivity" >
 
     <TextView
-        android:id="@+id/tv_input_fingerprint"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:background="#000000"
-        android:text="@string/your_soulmate_is"
-        android:textColor="#FFFFFF"
-        android:textSize="30sp" />
+        android:layout_marginTop="15dp"
+        android:text="@string/your_past_life"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_result"
@@ -23,20 +22,25 @@
         android:layout_height="0dp"
         android:layout_marginLeft="5dp"
         android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:textSize="20sp" />
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="50sp" />
 
     <TextView
-        android:id="@+id/tv_share_result"
+        android:id="@+id/tv_was"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:text="@string/share_result"
+        android:layout_gravity="right"
+        android:paddingRight="5dp"
+        android:text="@string/was"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         android:visibility="invisible" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
         android:orientation="horizontal" >
 
         <Button
@@ -63,11 +67,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
-        android:background="#787E7EBD"
+        android:background="@color/light_puple"
         android:gravity="center"
         android:paddingBottom="15dp"
         android:paddingTop="15dp"
-        android:textColor="#FFFFFFFF"
+        android:textColor="@color/white"
         android:textSize="15sp" />
 
     <include layout="@layout/layout_fingerprint_scanner" />

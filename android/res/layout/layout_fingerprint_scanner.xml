@@ -26,7 +26,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_alignRight="@+id/iv_fingerprint_scanner_board"
-        android:background="#FF0000"
+        android:background="@color/red"
         android:visibility="invisible" />
 
     <ImageView

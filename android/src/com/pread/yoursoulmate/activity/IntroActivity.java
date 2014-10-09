@@ -2,36 +2,61 @@ package com.pread.yoursoulmate.activity;
 
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.TextView;
 
 import com.pread.yoursoulmate.GlobalData;
 import com.pread.yoursoulmate.R;
 import com.pread.yoursoulmate.io.FileIO;
 
-public class IntroActivity extends Activity {
-    private TextView loading;
+public class IntroActivity extends Activity implements OnClickListener {
+    private View m_loadingView;
+	private View m_touchToScreenView;
     
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intro);
 
-        init();
-
+        setLayoutAndTouchEvent();
+        
+        startLoadingAnimation();
         fileLoading();
-        startMainActivity();
+        stopLoadingAnimation();
+       
+        showTouchToScreen();
 	}
 
-	private void init() {
-		loading = (TextView) findViewById(R.id.tv_intro_loading); 
+	@SuppressLint("InflateParams") 
+	private void setLayoutAndTouchEvent() {
+		LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		View introActivity = inflater.inflate(R.layout.activity_intro, null);
+		setContentView(introActivity);
+		introActivity.setOnClickListener(this);
+	}
+
+	@Override
+	public void onClick(View v) {
+		m_touchToScreenView.clearAnimation();
+		m_touchToScreenView.setVisibility(View.INVISIBLE);
+		
+		startActivity(new Intent(IntroActivity.this, MainActivity.class));
+		overridePendingTransition(R.anim.left_in, R.anim.left_out);
+		
+		finish();
+	}
+	
+	private void startLoadingAnimation() {
+		m_loadingView = findViewById(R.id.tv_intro_loading); 
 		Animation blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink);
-		loading.startAnimation(blinkAnimation);
+		m_loadingView.startAnimation(blinkAnimation);
 	}
 
 	private void fileLoading() {
@@ -43,19 +68,16 @@ public class IntroActivity extends Activity {
         gd.setResultList(resultList);
     }
 	
-	private void startMainActivity() {
-		Handler mHandler = new Handler();
-		mHandler.postDelayed(new Runnable()
-		{
-			@Override     
-			public void run() {
-				Intent intent = new Intent(IntroActivity.this, MainActivity.class);
-				startActivity(intent);
-				
-				loading.clearAnimation();
+	private void stopLoadingAnimation() {
+		m_loadingView.clearAnimation();
+		m_loadingView.setVisibility(View.INVISIBLE);
+	}
 
-				finish();
-			}
-		}, 3000);
+	private void showTouchToScreen() {
+		m_touchToScreenView = findViewById(R.id.tv_touch_to_screen);
+		Animation blinkAnimation = AnimationUtils.loadAnimation(this, R.anim.blink);
+		
+		m_touchToScreenView.setVisibility(View.VISIBLE);
+		m_touchToScreenView.startAnimation(blinkAnimation);
 	}
 }

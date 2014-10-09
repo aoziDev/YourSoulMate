@@ -23,7 +23,7 @@ public class FileIO {
 
     public void read(InputStream inputStream) {
         try {
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "EUC_KR"));
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"));
 
             while (true) {
                 String str = br.readLine();
