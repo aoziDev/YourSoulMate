@@ -46,10 +46,10 @@ public class KakaoStoryPostingActivity extends Activity {
 //  private final String marketParam = "referrer=kakaostory";
 	
 	/* 테스트용 market주소 */
-	private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.macropinch.pearl";
+//	private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.macropinch.pearl";
 	
 	/* Release시 아래 주소로 수정 */
-//    private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate";
+    private final String scrapUrl = "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate";
     
     /**
      * Main으로 넘길지 가입 페이지를 그릴지 판단하기 위해 me를 호출한다.

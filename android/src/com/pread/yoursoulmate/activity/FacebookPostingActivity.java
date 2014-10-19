@@ -124,9 +124,9 @@ public class FacebookPostingActivity extends Activity {
 
 			Bundle postParams = new Bundle();
 			/* 테스트용 임시 market주소 */
-			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.macropinch.pearl");
+//			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.macropinch.pearl");
 			/* Release시 아래주소로 변경 */
-//			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate");
+			postParams.putString("link", "https://play.google.com/store/apps/details?id=com.pread.yoursoulmate");
 			
 			/* 링크주소가 Market주소가 아닐 때 링크 정보를 아래와 같이 수정할 수 있음 */
 //			postParams.putString("name", getString(R.string.your_past_life));
